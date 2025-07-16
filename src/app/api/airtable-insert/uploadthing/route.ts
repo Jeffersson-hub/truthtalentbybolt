@@ -1,8 +1,8 @@
-// src/app/api/uploadthing/route.ts
-
+// src/app/api/airtable-insert/uploadthing/route.ts
 import { createRouteHandler } from "uploadthing/next";
-import { ourFileRouter } from "./core";
+import { OurFileRouter } from "./core";
 
 export const { GET, POST } = createRouteHandler({
-  router: ourFileRouter,
+  router: OurFileRouter,
 });
+
