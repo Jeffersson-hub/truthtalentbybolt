@@ -5,8 +5,8 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const candidateRoutes = require('./routes/candidates');
-const uploadRoutes = require('./routes/upload');
-const { initDatabase } = require('./config/database');
+// const uploadRoutes = require('./routes/upload');
+// const { initDatabase } = require('./config/database');
 const logger = require('./utils/logger');
 
 const app = express();
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Routes
 app.use('/api/candidates', candidateRoutes);
-app.use('/api/upload', uploadRoutes);
+// app.use('/api/upload', uploadRoutes);
 
 // Route de santé
 app.get('/api/health', (req, res) => {

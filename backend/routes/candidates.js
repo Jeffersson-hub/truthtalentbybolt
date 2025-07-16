@@ -1,5 +1,5 @@
 const express = require('express');
-const { getConnection } = require('../config/database');
+// const { getConnection } = require('../config/database');
 const logger = require('../utils/logger');
 
 const router = express.Router();
