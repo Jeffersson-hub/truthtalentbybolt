@@ -10,17 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@uploadthing/react": "^7.3.2",
     "airtable": "^0.12.2",
     "lucide-react": "^0.344.0",
+    "mammoth": "^1.9.1",
     "next": "^15.4.1",
     "officeparser": "^1.4.1",
+    "pdf-parse": "^1.1.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "uploadthing": "^7.7.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
     "@types/airtable": "^0.10.0",
     "@types/node": "^24.0.14",
+    "@types/pdf-parse": "^1.1.5",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

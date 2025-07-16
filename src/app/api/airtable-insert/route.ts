@@ -1,7 +1,8 @@
-// src/api/airtable-insert/route.ts
+// src/app/api/airtable-insert/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import Airtable from "airtable";
+import type { Candidate } from "@/types/index";
 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY! }).base(
   process.env.AIRTABLE_BASE_ID!
@@ -22,15 +23,10 @@ export async function POST(req: NextRequest) {
       "Soft Skills": body.softSkills,
       "Score IA": body.score,
       "Resume URL": body.resumeUrl,
-      "Piece jointe": [
-        {
-          url: body.resumeUrl,
-          filename: "cv.pdf",
-          type: "application/pdf",
-        },
-      ],
-      "Application Date": new Date(),
+      "Application Date": new Date().toISOString(),
     };
+
+    console.log(fields)
 
     const created = await table.create([{ fields }]);
 
