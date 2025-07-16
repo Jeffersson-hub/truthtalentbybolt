@@ -15,7 +15,7 @@ const dbConfig = {
   reconnect: true
 };
 
-async function createConnection() {
+/* async function createConnection() {
   try {
     connection = await mysql.createConnection(dbConfig);
     logger.info('✅ Connexion à la base de données établie');
@@ -24,11 +24,11 @@ async function createConnection() {
     logger.error('❌ Erreur de connexion à la base de données:', error);
     throw error;
   }
-}
+} */
 
 async function initDatabase() {
   try {
-    await createConnection();
+    // await createConnection();
     
     // Création de la table des candidats
     const createCandidatesTable = `

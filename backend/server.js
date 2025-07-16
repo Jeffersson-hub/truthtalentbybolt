@@ -67,7 +67,7 @@ app.use((err, req, res, next) => {
 });
 
 // Initialisation de la base de données et démarrage du serveur
-async function startServer() {
+/* async function startServer() {
   try {
     await initDatabase();
     logger.info('Base de données initialisée avec succès');
@@ -83,7 +83,7 @@ async function startServer() {
   }
 }
 
-startServer();
+startServer(); */
 
 // Gestion propre de l'arrêt du serveur
 process.on('SIGTERM', () => {
