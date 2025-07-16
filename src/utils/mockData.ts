@@ -1,6 +1,33 @@
 import { Candidate } from '../types';
 
 export const generateMockCandidates = (files: File[]): Candidate[] => {
+  // Noms français réalistes
+  const frenchNames = [
+    'Marie Dubois', 'Pierre Martin', 'Sophie Leroy', 'Jean Moreau', 'Camille Bernard',
+    'Nicolas Petit', 'Julie Durand', 'Thomas Robert', 'Emma Bonnet', 'Alexandre Roux',
+    'Léa Fournier', 'Maxime Girard', 'Chloé André', 'Antoine Mercier', 'Sarah Blanc',
+    'Julien Garnier', 'Manon Faure', 'Romain Rousseau', 'Clara Vincent', 'Hugo Lambert',
+    'Océane Morel', 'Lucas Fontaine', 'Inès Chevalier', 'Gabriel Gauthier', 'Jade Muller',
+    'Théo Lefebvre', 'Lola Bertrand', 'Nathan Masson', 'Zoé Robin', 'Enzo Sanchez'
+  ];
+
+  // Emails correspondants
+  const generateEmail = (name: string, index: number) => {
+    const cleanName = name.toLowerCase()
+      .replace(/[àáâãäå]/g, 'a')
+      .replace(/[èéêë]/g, 'e')
+      .replace(/[ìíîï]/g, 'i')
+      .replace(/[òóôõö]/g, 'o')
+      .replace(/[ùúûü]/g, 'u')
+      .replace(/[ç]/g, 'c')
+      .replace(/\s+/g, '.');
+    
+    const domains = ['gmail.com', 'outlook.fr', 'yahoo.fr', 'orange.fr', 'free.fr', 'hotmail.fr'];
+    const domain = domains[index % domains.length];
+    
+    return `${cleanName}@${domain}`;
+  };
+
   const mockSkills = [
     // Langages de programmation
     'JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'PHP', 'Ruby', 'Go', 'Rust', 'C++', 'Swift', 'Kotlin',
@@ -43,6 +70,7 @@ export const generateMockCandidates = (files: File[]): Candidate[] => {
   ];
 
   return files.map((file, index) => {
+    const candidateName = frenchNames[index % frenchNames.length];
     const randomSkillsCount = Math.floor(Math.random() * 8) + 3;
     const selectedSkills = mockSkills
       .sort(() => 0.5 - Math.random())
@@ -50,8 +78,8 @@ export const generateMockCandidates = (files: File[]): Candidate[] => {
 
     return {
       id: `candidate-${index}`,
-      name: `Candidat ${index + 1}`,
-      email: `candidat${index + 1}@example.com`,
+      name: candidateName,
+      email: generateEmail(candidateName, index),
       phone: `+33 6 ${String(Math.floor(Math.random() * 90000000) + 10000000).replace(/(\d{2})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4')}`,
       position: mockPositions[Math.floor(Math.random() * mockPositions.length)],
       experience: Math.floor(Math.random() * 15) + 1,

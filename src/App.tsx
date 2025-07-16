@@ -111,13 +111,17 @@ function App() {
                 <FileText className="h-8 w-8 text-blue-600" />
               </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Bienvenue sur RecrutPro
+                Bienvenue sur Truthtalent
               </h1>
               <p className="text-lg text-gray-600">
                 Téléversez des CV pour commencer le processus de recrutement
               </p>
             </div>
             <CVUpload onFilesUploaded={handleFilesUploaded} />
+            <CVUpload 
+              onFilesUploaded={handleFilesUploaded} 
+              onAnalyzeProfiles={() => setCurrentPage('profiles')}
+            />
           </div>
         ) : (
           // Interface principale avec candidats (profiles)
@@ -176,7 +180,10 @@ function App() {
 
               {/* Zone de téléversement supplémentaire */}
               <div className="mb-6">
-                <CVUpload onFilesUploaded={handleFilesUploaded} />
+                <CVUpload 
+                  onFilesUploaded={handleFilesUploaded} 
+                  onAnalyzeProfiles={() => setCurrentPage('profiles')}
+                />
               </div>
 
               {/* Liste des candidats */}

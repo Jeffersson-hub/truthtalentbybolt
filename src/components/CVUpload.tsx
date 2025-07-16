@@ -1,12 +1,13 @@
 import React, { useState, useCallback } from 'react';
-import { Upload, FileText, X, CheckCircle, AlertCircle } from 'lucide-react';
+import { Upload, FileText, X, CheckCircle, AlertCircle, Users } from 'lucide-react';
 import { UploadProgress } from '../types';
 
 interface CVUploadProps {
   onFilesUploaded: (files: File[]) => void;
+  onAnalyzeProfiles?: () => void;
 }
 
-const CVUpload: React.FC<CVUploadProps> = ({ onFilesUploaded }) => {
+const CVUpload: React.FC<CVUploadProps> = ({ onFilesUploaded, onAnalyzeProfiles }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<UploadProgress[]>([]);
 
@@ -142,6 +143,32 @@ const CVUpload: React.FC<CVUploadProps> = ({ onFilesUploaded }) => {
 
       {uploadProgress.length > 0 && (
         <div className="mt-6">
+          {/* Bouton d'accès à l'analyse des profils */}
+          {uploadProgress.some(item => item.status === 'completed') && (
+            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <span className="text-green-800 font-medium">
+                    CV traités avec succès !
+                  </span>
+                </div>
+                <button
+                  onClick={() => {
+                    // Cette fonction sera passée en props depuis App.tsx
+                    if (onAnalyzeProfiles) {
+                      onAnalyzeProfiles();
+                    }
+                  }}
+                  className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                >
+                  <Users className="h-4 w-4" />
+                  <span>Analyser les profils</span>
+                </button>
+              </div>
+            </div>
+          )}
+          
           <h3 className="text-sm font-medium text-gray-900 mb-3">
             Progression du téléversement
           </h3>

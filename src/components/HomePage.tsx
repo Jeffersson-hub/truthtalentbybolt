@@ -18,7 +18,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, candidateCount }) => {
                 <Users className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">RecrutPro</h1>
+                <h1 className="text-xl font-bold text-gray-900">Truthtalent</h1>
                 <p className="text-sm text-gray-500">Système de gestion des candidatures</p>
               </div>
             </div>
@@ -34,7 +34,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, candidateCount }) => {
             <Briefcase className="h-12 w-12 text-blue-600" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Bienvenue sur RecrutPro
+            Bienvenue sur Truthtalent
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Votre solution complète pour gérer efficacement vos processus de recrutement. 
@@ -42,35 +42,8 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, candidateCount }) => {
           </p>
         </div>
 
-        {/* Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
-            <div className="bg-blue-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-              <FileText className="h-6 w-6 text-blue-600" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">{candidateCount}</h3>
-            <p className="text-gray-600">Candidats enregistrés</p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
-            <div className="bg-green-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-              <TrendingUp className="h-6 w-6 text-green-600" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">98%</h3>
-            <p className="text-gray-600">Taux de satisfaction</p>
-          </div>
-          
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
-            <div className="bg-purple-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
-              <Users className="h-6 w-6 text-purple-600" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">500+</h3>
-            <p className="text-gray-600">Recrutements réussis</p>
-          </div>
-        </div>
-
         {/* Action Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {/* Téléversement CV */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
             <div className="bg-blue-100 p-4 rounded-full w-16 h-16 mx-auto mb-6 flex items-center justify-center">
@@ -181,10 +154,37 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate, candidateCount }) => {
           </div>
         </div>
 
+        {/* Statistics */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
+            <div className="bg-blue-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+              <FileText className="h-6 w-6 text-blue-600" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">{candidateCount}</h3>
+            <p className="text-gray-600">Candidats enregistrés</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
+            <div className="bg-green-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+              <TrendingUp className="h-6 w-6 text-green-600" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">98%</h3>
+            <p className="text-gray-600">Taux de satisfaction</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
+            <div className="bg-purple-100 p-3 rounded-full w-12 h-12 mx-auto mb-4 flex items-center justify-center">
+              <Users className="h-6 w-6 text-purple-600" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">500+</h3>
+            <p className="text-gray-600">Recrutements réussis</p>
+          </div>
+        </div>
+
         {/* Features Section */}
         <div className="mt-16 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-8">
-            Pourquoi choisir RecrutPro ?
+            Pourquoi choisir Truthtalent ?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="p-4">

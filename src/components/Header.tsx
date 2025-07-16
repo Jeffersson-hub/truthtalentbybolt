@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ onBack }) => {
               <Users className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">RecrutPro</h1>
+              <h1 className="text-xl font-bold text-gray-900">Truthtalent</h1>
               <p className="text-sm text-gray-500">Système de gestion des candidatures</p>
             </div>
           </div>
