@@ -1,8 +1,8 @@
-//src/utils/mockData.ts
+/* //src/utils/mockData.ts
 
 //import { Candidate } from '../types';
 
-export const generateMockCandidates = (files: File[]): Candidate[] => {
+ export const generateMockCandidates = (files: File[]): Candidate[] => {
   // Noms français réalistes
   const frenchNames = [
     'Marie Dubois', 'Pierre Martin', 'Sophie Leroy', 'Jean Moreau', 'Camille Bernard',
@@ -12,7 +12,7 @@ export const generateMockCandidates = (files: File[]): Candidate[] => {
     'Océane Morel', 'Lucas Fontaine', 'Inès Chevalier', 'Gabriel Gauthier', 'Jade Muller',
     'Théo Lefebvre', 'Lola Bertrand', 'Nathan Masson', 'Zoé Robin', 'Enzo Sanchez'
   ];
-
+ 
   // Emails correspondants
   const generateEmail = (name: string, index: number) => {
     const cleanName = name.toLowerCase()
@@ -94,4 +94,4 @@ export const generateMockCandidates = (files: File[]): Candidate[] => {
       score: Math.floor(Math.random() * 40) + 60 // Score entre 60 et 100
     };
   });
-};
+}; */

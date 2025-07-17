@@ -1,3 +1,5 @@
+// src/utils/extractCVData.ts
+
 export function extractCVData(text: string) {
   const email = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/)?.[0] || "";
   const phone = text.match(/(?:\+33|0)[1-9](?:[\s.-]?\d{2}){4}/)?.[0] || "";
