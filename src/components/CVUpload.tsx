@@ -1,5 +1,3 @@
-// src/components/CVUpload.tsx
-// 
 import React, { useState, useCallback } from 'react';
 import { Upload, FileText, X, CheckCircle, AlertCircle, Users } from 'lucide-react';
 import { UploadProgress } from '../types';
@@ -70,7 +68,7 @@ const CVUpload: React.FC<CVUploadProps> = ({ onFilesUploaded, onAnalyzeProfiles 
     onFilesUploaded(files);
   };
 
-  const simulateUpload = (_fileName: string, index: number) => {
+  const simulateUpload = (fileName: string, index: number) => {
     let progress = 0;
     const interval = setInterval(() => {
       progress += Math.random() * 15;
