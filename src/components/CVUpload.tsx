@@ -70,7 +70,7 @@ const CVUpload: React.FC<CVUploadProps> = ({ onFilesUploaded, onAnalyzeProfiles 
     onFilesUploaded(files);
   };
 
-  const simulateUpload = (fileName: string, index: number) => {
+  const simulateUpload = (_fileName: string, index: number) => {
     let progress = 0;
     const interval = setInterval(() => {
       progress += Math.random() * 15;
