@@ -1,3 +1,5 @@
+// src/utils/filtering.ts
+
 import { Candidate, FilterCriteria } from '../types';
 
 export const filterCandidates = (candidates: Candidate[], filters: FilterCriteria): Candidate[] => {

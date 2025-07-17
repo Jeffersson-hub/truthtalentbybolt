@@ -7,8 +7,9 @@ import FilterPanel from './components/FilterPanel';
 import CandidateCard from './components/CandidateCard';
 import ActionPanel from './components/ActionPanel';
 import { Candidate, FilterCriteria } from './types';
+//import { generateMockCandidates } from './utils/mockData';
+//import { filterCandidates, calculateMatchScore } from './utils/filtering';
 import { FileText, Users, TrendingUp } from 'lucide-react';
-import { filterCandidates, calculateMatchScore } from './utils/filtering';
 
 type CurrentPage = 'home' | 'upload' | 'profiles' | 'dashboard';
 
@@ -25,7 +26,8 @@ function App() {
     education: ''
   });
 
-  // ✅ Charger les candidats depuis l’API
+  //Ajout
+  useEffect(() => {
   const fetchCandidates = async () => {
     try {
       const res = await fetch('http://localhost:3001/api/candidates/all');
@@ -36,34 +38,29 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetchCandidates();
+  fetchCandidates();
   }, []);
 
-  // ✅ (optionnel) Remettre filtrage + score
-  /*
-  useEffect(() => {
+  /* useEffect(() => {
     const filtered = filterCandidates(candidates, currentFilters);
+    // Calculer et mettre à jour les scores de correspondance
     const filteredWithScores = filtered.map(candidate => ({
       ...candidate,
       score: calculateMatchScore(candidate, currentFilters)
     }));
+    // Trier par score décroissant
     filteredWithScores.sort((a, b) => (b.score || 0) - (a.score || 0));
     setFilteredCandidates(filteredWithScores);
-  }, [candidates, currentFilters]);
-  */
+  }, [candidates, currentFilters]); */
 
-  // ✅ Corrigé : on ne crée pas de candidats à partir de fichiers
-  const handleFilesUploaded = (_files: File[]) => {
-    console.log("📁 Fichiers bien téléversés.");
-    // Pas de traitement ici, tout est fait côté backend
+  const handleFilesUploaded = (files: File[]) => {
+    const newCandidates = CandidateCard(files);
+    setCandidates(prev => [...prev, ...newCandidates]);
   };
-
-  // ✅ Quand on clique sur "Analyser les profils"
-  const handleAnalyzeProfiles = () => {
-    fetchCandidates(); // recharge la liste depuis le backend
-    setCurrentPage('profiles');
-  };
+  /* const handleFilesUploaded = (files: File[]) => {
+    const newCandidates = generateMockCandidates(files);
+    setCandidates(prev => [...prev, ...newCandidates]);
+  }; */
 
   const handleFilterChange = (filters: FilterCriteria) => {
     setCurrentFilters(filters);
@@ -78,11 +75,16 @@ function App() {
   };
 
   const handleSendNotifications = () => {
+    // Ici, on simule l'envoi des notifications
     const rejectedCandidates = candidates.filter(c => c.status === 'rejected');
+    
+    // Simuler l'envoi d'emails
     rejectedCandidates.forEach(candidate => {
       console.log(`Email de refus envoyé à ${candidate.email}`);
     });
-    alert(`${rejectedCandidates.length} notification(s) envoyée(s) avec succès !`);
+
+    // Afficher une notification de succès
+    alert(`${rejectedCandidates.length} notification(s) de refus envoyée(s) avec succès !`);
   };
 
   const selectedCount = candidates.filter(c => c.status === 'selected').length;
@@ -94,7 +96,7 @@ function App() {
     setCurrentPage(page);
   };
 
-  // --- Page Accueil
+  // Page d'accueil
   if (currentPage === 'home') {
     return (
       <HomePage 
@@ -104,7 +106,7 @@ function App() {
     );
   }
 
-  // --- Dashboard
+  // Dashboard
   if (currentPage === 'dashboard') {
     return (
       <Dashboard 
@@ -114,13 +116,14 @@ function App() {
     );
   }
 
-  // --- Upload ou Profiles
+  // Interface de recrutement (upload + profiles)
   return (
     <div className="min-h-screen bg-gray-50">
       <Header onBack={() => setCurrentPage('home')} />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {candidates.length === 0 || currentPage === 'upload' ? (
+          // État initial - pas de candidats
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
               <div className="bg-blue-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
@@ -133,14 +136,16 @@ function App() {
                 Téléversez des CV pour commencer le processus de recrutement
               </p>
             </div>
-
+            <CVUpload onFilesUploaded={handleFilesUploaded} />
             <CVUpload 
               onFilesUploaded={handleFilesUploaded} 
-              onAnalyzeProfiles={handleAnalyzeProfiles}
+              onAnalyzeProfiles={() => setCurrentPage('profiles')}
             />
           </div>
         ) : (
+          // Interface principale avec candidats (profiles)
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Sidebar gauche - Filtres */}
             <div className="lg:col-span-1">
               <div className="sticky top-8 space-y-6">
                 <FilterPanel
@@ -157,7 +162,9 @@ function App() {
               </div>
             </div>
 
+            {/* Zone principale - Candidats */}
             <div className="lg:col-span-3">
+              {/* Statistiques en haut */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
                   <div className="flex items-center space-x-2">
@@ -190,13 +197,15 @@ function App() {
                 </div>
               </div>
 
+              {/* Zone de téléversement supplémentaire */}
               <div className="mb-6">
                 <CVUpload 
                   onFilesUploaded={handleFilesUploaded} 
-                  onAnalyzeProfiles={handleAnalyzeProfiles}
+                  onAnalyzeProfiles={() => setCurrentPage('profiles')}
                 />
               </div>
 
+              {/* Liste des candidats */}
               {filteredCandidates.length > 0 ? (
                 <div className="space-y-4">
                   {filteredCandidates.map(candidate => (

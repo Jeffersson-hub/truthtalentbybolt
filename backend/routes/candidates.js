@@ -4,8 +4,41 @@ const logger = require('../utils/logger');
 
 const router = express.Router();
 
+//ajout
+// GET /api/candidates/all
+router.get('/all', async (req, res) => {
+  try {
+    const connection = getConnection();
+    const [rows] = await connection.execute(`
+      SELECT id, name, email, phone, position, experience, skills, location, education, uploadDate, status
+      FROM candidates
+      ORDER BY uploadDate DESC
+    `);
+
+    const candidates = rows.map(row => ({
+      id: row.id,
+      name: row.name,
+      email: row.email,
+      phone: row.phone,
+      position: row.position,
+      experience: row.experience,
+      skills: JSON.parse(row.skills || '[]'),
+      location: row.location,
+      education: row.education,
+      uploadDate: new Date(row.uploadDate),
+      status: row.status,
+      score: Math.floor(Math.random() * 30) + 70  // Optionnel : score simulé
+    }));
+
+    res.json(candidates);
+  } catch (error) {
+    logger.error('Erreur récupération candidats:', error);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+});
+
 // Récupérer tous les candidats avec filtres
-router.get('/', async (req, res) => {
+/* router.get('/', async (req, res) => {
   try {
     const connection = getConnection();
     
@@ -121,7 +154,7 @@ router.get('/', async (req, res) => {
     logger.error('Erreur récupération candidats:', error);
     res.status(500).json({ error: 'Erreur serveur' });
   }
-});
+}); */
 
 // Récupérer un candidat spécifique
 router.get('/:id', async (req, res) => {

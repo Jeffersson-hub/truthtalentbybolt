@@ -1,3 +1,6 @@
+//src/components/CandidateCard.tsx
+
+
 import React from 'react';
 import { Mail, Phone, MapPin, Briefcase, Star, GraduationCap, Calendar, CheckCircle, XCircle } from 'lucide-react';
 import { Candidate } from '../types';
@@ -147,7 +150,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onStatusChange
             <span className="font-medium">Candidat validé ✓</span>
           </div>
           <button
-            onClick={() => onStatusChange(candidate.id, 'pending')}
+            onClick={() => onStatusChange(candidate.id, 'rejected')}
             className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm"
           >
             Annuler la validation
@@ -162,7 +165,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onStatusChange
             <span className="font-medium">Candidat rejeté ✗</span>
           </div>
           <button
-            onClick={() => onStatusChange(candidate.id, 'pending')}
+            onClick={() => onStatusChange(candidate.id, 'rejected')}
             className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm"
           >
             Reconsidérer

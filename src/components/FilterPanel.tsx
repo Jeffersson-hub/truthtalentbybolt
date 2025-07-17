@@ -1,5 +1,7 @@
+// src/components/FilterPanel.tsx
+
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Briefcase, Star, GraduationCap, Filter, Plus, X } from 'lucide-react';
+import { MapPin, Briefcase, Star, GraduationCap, Filter, Plus, X } from 'lucide-react';
 import { FilterCriteria, Candidate } from '../types';
 
 interface FilterPanelProps {
@@ -71,8 +73,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange, candidateCoun
   // Combiner les données extraites avec les données prédéfinies et personnalisées
   const allPositions = [...new Set([...extractedPositions, ...customPositions])].sort();
   const allSkills = [...new Set([...extractedSkills, ...predefinedSkills, ...customSkills])].sort();
-  const allLocations = [...new Set([...extractedLocations, ...predefinedLocations])].sort();
-  const allEducations = [...new Set([...extractedEducations, ...educationLevels])].sort();
 
   // Charger les données personnalisées depuis le localStorage
   useEffect(() => {
