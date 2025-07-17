@@ -1,16 +1,24 @@
 // src/app/api/airtable-insert/uploadthing/core.ts
 
-import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { parseOfficeAsync } from "officeparser";
 
 const f = createUploadthing();
 
 export const OurFileRouter = {
   cvUploader: f({
     "application/pdf": { maxFileSize: "4MB" },
-    "application/msword": { maxFileSize: "4MB" }, // .doc
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": { maxFileSize: "4MB" }, // .docx
+    "application/msword": { maxFileSize: "4MB" },
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": { maxFileSize: "4MB" },
+    "application/zip": { maxFileSize: "10MB" },
   }).onUploadComplete(async ({ file }) => {
     console.log("✅ Fichier reçu :", file);
+
+    const response = await fetch(file.url);
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    const text = await parseOfficeAsync(buffer);
+    console.log("🧠 Contenu extrait :", text?.text?.slice(0, 500)); // aperçu
+
     return { uploadedUrl: file.ufsUrl };
   }),
 } satisfies FileRouter;

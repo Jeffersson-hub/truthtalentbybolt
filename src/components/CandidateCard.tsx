@@ -1,3 +1,5 @@
+// src/components/CandidateCard.tsx
+
 import React from 'react';
 import { Mail, Phone, MapPin, Briefcase, Star, GraduationCap, Calendar, CheckCircle, XCircle } from 'lucide-react';
 import { Candidate } from '../types';

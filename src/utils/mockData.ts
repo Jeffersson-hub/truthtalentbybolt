@@ -1,4 +1,6 @@
-import { Candidate } from '../types';
+//src/utils/mockData.ts
+
+//import { Candidate } from '../types';
 
 export const generateMockCandidates = (files: File[]): Candidate[] => {
   // Noms français réalistes

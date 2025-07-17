@@ -1,3 +1,5 @@
+// src/components/FilterPanel.tsx
+
 import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Briefcase, Star, GraduationCap, Filter, Plus, X } from 'lucide-react';
 import { FilterCriteria, Candidate } from '../types';
