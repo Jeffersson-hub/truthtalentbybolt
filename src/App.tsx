@@ -41,7 +41,7 @@ function App() {
   }, []);
 
   // ✅ (optionnel) Remettre filtrage + score
-  /*
+  
   useEffect(() => {
     const filtered = filterCandidates(candidates, currentFilters);
     const filteredWithScores = filtered.map(candidate => ({
@@ -51,7 +51,20 @@ function App() {
     filteredWithScores.sort((a, b) => (b.score || 0) - (a.score || 0));
     setFilteredCandidates(filteredWithScores);
   }, [candidates, currentFilters]);
-  */
+  
+  //Ajout
+  useEffect(() => {
+  const filtered = filterCandidates(candidates, currentFilters);
+
+  const filteredWithScores = filtered.map(candidate => ({
+    ...candidate,
+    score: calculateMatchScore(candidate, currentFilters)
+  }));
+
+  filteredWithScores.sort((a, b) => (b.score || 0) - (a.score || 0));
+  setFilteredCandidates(filteredWithScores);
+  }, [candidates, currentFilters]);
+
 
   // ✅ Corrigé : on ne crée pas de candidats à partir de fichiers
   const handleFilesUploaded = (_files: File[]) => {
@@ -63,6 +76,8 @@ function App() {
   const handleAnalyzeProfiles = () => {
     fetchCandidates(); // recharge la liste depuis le backend
     setCurrentPage('profiles');
+
+    console.log('changement page')
   };
 
   const handleFilterChange = (filters: FilterCriteria) => {
@@ -120,8 +135,9 @@ function App() {
       <Header onBack={() => setCurrentPage('home')} />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {candidates.length === 0 || currentPage === 'upload' ? (
-          <div className="max-w-2xl mx-auto">
+        {/* {candidates.length === 0 || currentPage === 'upload' ?  */}
+        {currentPage === 'upload' || (candidates.length === 0 && currentPage !== 'profiles') ? (
+           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
               <div className="bg-blue-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                 <FileText className="h-8 w-8 text-blue-600" />
