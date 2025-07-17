@@ -1,18 +1,5 @@
-// backend/routes/candidates.js
-
 const express = require('express');
-const router = express.Router();
-
-// Route de base inactive pour le moment
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Route candidates en attente de configuration Airtable/MySQL.' });
-});
-
-module.exports = router;
-
-
-/* const express = require('express');
-// const { getConnection } = require('../config/database');
+const { getConnection } = require('../config/database');
 const logger = require('../utils/logger');
 
 const router = express.Router();
@@ -300,4 +287,4 @@ router.get('/stats/overview', async (req, res) => {
   }
 });
 
-module.exports = router; */
+module.exports = router;

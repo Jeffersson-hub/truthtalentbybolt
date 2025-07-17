@@ -1,5 +1,3 @@
-// src/App.tsx
-
 import React, { useState, useEffect } from 'react';
 import HomePage from './components/HomePage';
 import Dashboard from './components/Dashboard';
@@ -119,12 +117,11 @@ function App() {
                 Téléversez des CV pour commencer le processus de recrutement
               </p>
             </div>
-            {/* <CVUpload onFilesUploaded={handleFilesUploaded} /> */}
+            <CVUpload onFilesUploaded={handleFilesUploaded} />
             <CVUpload 
               onFilesUploaded={handleFilesUploaded} 
               onAnalyzeProfiles={() => setCurrentPage('profiles')}
             />
-            
           </div>
         ) : (
           // Interface principale avec candidats (profiles)
@@ -187,7 +184,6 @@ function App() {
                   onFilesUploaded={handleFilesUploaded} 
                   onAnalyzeProfiles={() => setCurrentPage('profiles')}
                 />
-                
               </div>
 
               {/* Liste des candidats */}

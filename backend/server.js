@@ -5,8 +5,8 @@ const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const candidateRoutes = require('./routes/candidates');
-// const uploadRoutes = require('./routes/upload');
-// const { initDatabase } = require('./config/database');
+const uploadRoutes = require('./routes/upload');
+const { initDatabase } = require('./config/database');
 const logger = require('./utils/logger');
 
 const app = express();
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Routes
 app.use('/api/candidates', candidateRoutes);
-// app.use('/api/upload', uploadRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Route de santé
 app.get('/api/health', (req, res) => {
@@ -67,7 +67,7 @@ app.use((err, req, res, next) => {
 });
 
 // Initialisation de la base de données et démarrage du serveur
-/* async function startServer() {
+async function startServer() {
   try {
     await initDatabase();
     logger.info('Base de données initialisée avec succès');
@@ -83,7 +83,7 @@ app.use((err, req, res, next) => {
   }
 }
 
-startServer(); */
+startServer();
 
 // Gestion propre de l'arrêt du serveur
 process.on('SIGTERM', () => {
