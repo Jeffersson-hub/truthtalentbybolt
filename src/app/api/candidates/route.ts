@@ -1,34 +1,36 @@
-// src/app/api/candidates/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { utapi } from "../../../../backend/";
 
-import { NextResponse } from "next/server";
-import Airtable from "airtable";
-
-const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY!;
-const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID!;
-const AIRTABLE_TABLE_ID = process.env.AIRTABLE_TABLE_ID!;
-
-Airtable.configure({ apiKey: AIRTABLE_API_KEY });
-const base = Airtable.base(AIRTABLE_BASE_ID);
-
-export async function GET() {
+export async function POST(req: NextRequest) {
   try {
-    const records = await base(AIRTABLE_TABLE_ID).select().all();
+    const formData = await req.formData();
+    const files = formData.getAll("files") as File[];
 
-    const candidates = records.map((record: any) => ({
-      id: record.id,
-      name: record.fields["Candidate Name"] || "",
-      email: record.fields["Email address"] || "",
-      phone: record.fields["Phone Number"] || "",
-      resumeUrl: record.fields["Resume URL"] || "",
-      skills: (record.fields["Skills"] as string)?.split(",").map(s => s.trim()) || [],
-      softSkills: (record.fields["Soft Skills"] as string)?.split(",").map(s => s.trim()) || [],
-      experience: record.fields["Experiences"] || "",
-      score: record.fields["Score"] || 0,
-    }));
+    if (!files || files.length === 0) {
+      return NextResponse.json({ error: "Aucun fichier reçu" }, { status: 400 });
+    }
 
-    return NextResponse.json(candidates);
-  } catch (error) {
-    console.error("❌ Erreur lors de la lecture Airtable:", error);
-    return NextResponse.json({ error: "Erreur lecture Airtable" }, { status: 500 });
+    const results: { name: string; url: string }[] = [];
+
+    for (const file of files) {
+      const buffer = await file.arrayBuffer();
+      const blob = new Blob([buffer], { type: file.type });
+
+      const uploaded = await utapi.uploadFiles(blob, {
+        // Optionnel : personnalisations
+        filename: file.name,
+      });
+
+      if (!uploaded?.url) {
+        throw new Error("UploadThing: Échec de l’upload");
+      }
+
+      results.push({ name: file.name, url: uploaded.url });
+    }
+
+    return NextResponse.json(results);
+  } catch (err) {
+    console.error("❌ UploadThing API error:", err);
+    return NextResponse.json({ error: "Erreur d’upload" }, { status: 500 });
   }
 }

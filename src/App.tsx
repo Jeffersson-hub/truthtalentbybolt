@@ -28,7 +28,7 @@ function App() {
   // ✅ Charger les candidats depuis l’API
   const fetchCandidates = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/candidates/all');
+      const res = await fetch('/api/candidates');
       const data = await res.json();
       setCandidates(data);
     } catch (error) {
@@ -67,10 +67,6 @@ function App() {
 
 
   // ✅ Corrigé : on ne crée pas de candidats à partir de fichiers
-  const handleFilesUploaded = (_files: File[]) => {
-    console.log("📁 Fichiers bien téléversés.");
-    // Pas de traitement ici, tout est fait côté backend
-  };
 
   // ✅ Quand on clique sur "Analyser les profils"
   const handleAnalyzeProfiles = () => {
@@ -108,6 +104,9 @@ function App() {
   const handleNavigate = (page: CurrentPage) => {
     setCurrentPage(page);
   };
+
+  //ajout
+
 
   // --- Page Accueil
   if (currentPage === 'home') {
@@ -150,10 +149,8 @@ function App() {
               </p>
             </div>
 
-            <CVUpload 
-              onFilesUploaded={handleFilesUploaded} 
-              onAnalyzeProfiles={handleAnalyzeProfiles}
-            />
+            <CVUpload onAnalyzeProfiles={handleAnalyzeProfiles} />
+
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -207,10 +204,7 @@ function App() {
               </div>
 
               <div className="mb-6">
-                <CVUpload 
-                  onFilesUploaded={handleFilesUploaded} 
-                  onAnalyzeProfiles={handleAnalyzeProfiles}
-                />
+                <CVUpload onAnalyzeProfiles={handleAnalyzeProfiles} />
               </div>
 
               {filteredCandidates.length > 0 ? (

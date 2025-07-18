@@ -1,9 +1,9 @@
 // src/app/api/parse-analyze
 
 import { NextRequest, NextResponse } from "next/server";
-import { parseOfficeAsync } from "@/lib/officeparser";
-import { extractCVData } from "@/utils/extractCVData";
-import { insertIntoAirtable } from "@/utils/airtable";
+import { parseOfficeAsync } from "../../lib/officeparser";
+import { extractCVData } from "../../utils/extractCVData";
+import { insertIntoAirtable } from "../../utils/airtable";
 
 export async function POST(req: NextRequest) {
   const body = await req.json(); // { url, filename }

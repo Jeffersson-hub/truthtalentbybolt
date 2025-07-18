@@ -17,7 +17,6 @@ Backend Node.js pour le système de gestion des candidatures Truthtalent avec an
 
 - Node.js 18+ 
 - MySQL 8.0+
-- Clé API OpenAI (ChatGPT)
 - Serveur Ubuntu 22.04 (Hostinger)
 
 ## 🛠️ Installation sur Hostinger
@@ -91,9 +90,6 @@ DB_HOST=localhost
 DB_USER=truthtalent_user
 DB_PASSWORD=your_secure_password
 DB_NAME=truthtalent_db
-
-# OpenAI API
-OPENAI_API_KEY=sk-your-openai-api-key
 
 # JWT Secret
 JWT_SECRET=your-super-secret-jwt-key-here

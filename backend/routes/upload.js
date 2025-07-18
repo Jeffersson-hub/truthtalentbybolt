@@ -56,9 +56,18 @@ router.post('/cv', upload.array('cvFiles', 10), async (req, res) => {
         const textContent = await documentParser.parseDocument(
           file.buffer, 
           file.originalname, 
-          file.mimetype
+          file.mimetype,
+
         );
-        
+        const rawText = await documentParser(filePath); // ex: via @harshankur/officeparser
+          console.log("📝 Texte brut extrait du fichier:", rawText);
+
+        const parsedCandidate = await chatgptService(rawText); // ou HuggingFace
+
+          console.log("🧠 Résultat IA:", parsedCandidate);
+
+        await insertIntoAirtable(parsedCandidate);
+
         // 2. Analyse avec ChatGPT
         const extractedData = await chatgptService.analyzeCVContent(
           textContent, 

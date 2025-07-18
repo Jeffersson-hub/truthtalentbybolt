@@ -1,8 +1,8 @@
-// src/api/parse-cv/parse-analyze.ts
+// src/app/api/parse-cv/parse-analyze.ts
 
-import { extractCVData } from "@/utils/extractCVData";
-import { insertIntoAirtable } from "@/utils/airtable"; // À créer si besoin
-import { parseOfficeAsync } from "@/lib/officeparser";
+import { extractCVData } from "../../../utils/extractCVData";
+import { insertIntoAirtable } from "../../../utils/airtable"; // À créer si besoin
+import { parseOfficeAsync } from "../../../lib/officeparser";
 import { NextRequest, NextResponse } from "next/server";
 
 
